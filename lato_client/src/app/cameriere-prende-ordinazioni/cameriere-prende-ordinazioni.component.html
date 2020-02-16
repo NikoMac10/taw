@@ -1,0 +1,107 @@
+
+<div class="container mt-5 ">
+	<div class="row">
+		<div class="col">
+			<h3>Tavolo N°: {{tavolo.tavolo}}</h3> 
+		</div>
+		<div class="col">
+			<h3>Numero persone: {{tavolo.persone}} </h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p class="h4 mt-4">Ordinazione bibite</p> 
+		</div>
+	</div>
+	<div class="row mt-2 d-flex justify-content-center">
+		<div class="col-md">
+			<p class="h5 mt-3">Articoli ordinati:</p> 
+			<div class="list-group" id="list-tab" role="tablist">
+				<div class="list-group ">
+					<div *ngFor="let message of messages3">
+						<li class="list-group-item disabled">
+							 <div class="row">
+								<div class="col">
+									<h6>{{message.nome}}</h6>
+							    </div>
+								<div class="col">
+									 Quantità: {{message.quantita}}
+							    </div>	
+							 </div>	
+						     <div class="row d-flex justify-content-start">
+								<div class="ml-2" *ngFor="let put of message.aggiunte">
+									<span class="badge badge-success badge-pill">{{put}}</span>
+								</div>
+							 </div>	
+						</li>
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+				<button type="button"  class="btn btn-warning mt-4" 
+				(click)="ChiudiOrdinazioneBibite();">Chiudi ordinazione bibite</button>
+			</div>
+		</div>
+		<div class="col-lg">
+			<p class="h5 mt-3">Listino Articoli :</p> 
+			<div class="list-group" id="list-tab" role="tablist">
+				<div class="list-group ">
+					<div *ngFor="let message of messages">
+						<button type="button" *ngIf="message.booleano ; else loggedOut" 
+						class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center active" 
+						(click)="bibite(message.nome);">{{message.nome}} 
+						<span class="badge badge-success badge-pill">{{message.prezzo}}€</span> </button>
+						
+						<ng-template #loggedOut>
+						<button type="button" class="list-group-item list-group-item-action 
+						d-flex justify-content-between align-items-center" 
+						(click)="bibite(message.nome);">{{message.nome}} 
+						<span class="badge badge-success badge-pill">{{message.prezzo}}€</span> </button>
+						</ng-template>
+					</div>
+				</div>
+			</div>
+			<p class="h5 mt-3">Listino Aggiunte :</p> 
+			<div class="list-group" id="list-tab" role="tablist">
+				<div class="list-group ">
+					<div *ngFor="let message of messages2">
+						<button type="button" *ngIf="message.booleano ; else loggedOut" 
+						class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center active" 
+						(click)="aggiunte(message.nome);">{{message.nome}} 
+						<span class="badge badge-success badge-pill">{{message.prezzo}}€</span> </button>
+						
+						<ng-template #loggedOut>
+						<button type="button" class="list-group-item list-group-item-action 
+						d-flex justify-content-between align-items-center" 
+						(click)="aggiunte(message.nome);">{{message.nome}} 
+						<span class="badge badge-success badge-pill">{{message.prezzo}}€</span> </button>
+						</ng-template>
+					</div> 
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-12">
+					<div *ngIf="errmessage" class="alert alert-danger mt-4 mb-0" role="alert">
+						 Ops: {{errmessage}}
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-12">
+					<div *ngIf="posmessage" class="alert alert-success mt-4 mb-0" role="alert">
+						 {{posmessage}}
+					</div>
+				</div>
+			</div>	
+			<div class="row mt-4 mb-5">
+				<div class="col-6 d-flex justify-content-start pl-5 ">
+					<input class="form-control" [(ngModel)]="textValue" type="number" placeholder="Quantità">
+				</div>
+				<div class="col-6  d-flex justify-content-end pr-5">
+					 <button type="button" (click)="AggiungiArt();" class="btn btn-success">Aggiungi</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

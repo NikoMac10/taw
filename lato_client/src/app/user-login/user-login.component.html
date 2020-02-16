@@ -1,0 +1,29 @@
+<div class="container" style="width: 400px; margin-top: 20px;" >
+  <div class="form-signin text-center loginform ">
+    <img src="assets/img/pizza-slice-solid.svg" class="loginlogo"/>
+
+    <h1 class="h3 mb-3 font-weight-normal">Per favore, inserisci le tue credenziali:</h1>
+
+    <label for="inputEmail" class="sr-only">Username</label>
+    <input type="email" #mailtxt id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+    
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" #passwdtxt id="inputPassword" class="form-control" placeholder="Password" required>
+    
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" #checkr value="remember-me"> Ricordami
+      </label>
+    </div>
+    
+    <div *ngIf="errmessage" class="alert alert-danger" role="alert">
+      Errore di login: {{errmessage}}
+    </div>
+    
+    <button class="btn btn-lg btn-primary btn-block" (click)="login( mailtxt.value, passwdtxt.value, checkr.checked );" >Accedi</button>
+    
+    
+    <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+	<p class=" mb-3 text-muted">Nicolas Pietro Martignon & Thomas Visentin</p>
+  </div>
+</div>

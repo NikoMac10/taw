@@ -1,0 +1,11 @@
+<div class="row d-flex justify-content-around mt-5">
+	<button type="button" class="btn btn-danger"  (click)="indietro()"> <- Indietro</button>
+	<h3>{{ time | date: 'hh:mm:ss a' }}</h3>
+	<h3>Cassiere: {{us.get_username()}}</h3>
+</div>
+
+<p  class="h2 mt-5  text-center">Statistiche incasso</p>
+<div class="h3 mt-3 text-center">Incasso giorno : {{giorno.risultato}}</div>
+<div class="h3 text-center">Incasso settimana : {{settimana.risultato}}</div>
+<div class="h3 mb-4 text-center">Incasso mese : {{mese.risultato}}</div>
+

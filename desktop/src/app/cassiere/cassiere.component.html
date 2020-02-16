@@ -1,0 +1,139 @@
+<div class="container mt-5" >
+	<div class="row ">
+		<div class="col-md-4 my-2 d-flex justify-content-center">
+				<button type="button" class="btn btn-danger btn-lg " (click)="logout()">Logout</button>
+		</div>
+		<div class="col-md-4 my-2 d-flex justify-content-start">
+				<h3>{{ time | date: 'hh:mm:ss a' }}</h3>
+		</div>
+		<div class="col-md-4 my-2 d-flex justify-content-start">
+				<h3>Cassiere: {{us.get_username()}}</h3>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="col-md-6 my-3 d-flex justify-content-end">
+				<button type="button" class="btn btn-primary btn-lg btn-block"  
+				(click)="incasso()">Incasso</button>
+		</div>
+		<div class="col-md-6 my-3 d-flex justify-content-start">
+				 <button type="button" class="btn btn-primary btn-lg btn-block" 
+				 (click)="gestione_utenti()">Gestione utenti</button>
+		</div>
+		<div class="mt-4 "> <h3>Gestione tavoli:</h3></div>
+	</div>
+	<div class="row mt-3 d-flex justify-content-center">
+			<div class="mt-2 mr-2"  *ngFor="let message of messages" >
+				<button type="button" class="btn btn-sq-lg btn-warning" 
+				(click)="bottone_tavolo(message.numero)" *ngIf="message.occupato ; else loggedOut">
+				<h3>{{message.numero}}</h3></button>
+				<ng-template #loggedOut>
+					<button type="button" class="btn btn-sq-lg btn-success" 
+					(click)="bottone_tavolo(message.numero)"><h3>{{message.numero}}</h3></button>     	
+				</ng-template>
+			</div>
+	</div>
+	
+	<div class="col-12">
+		<div *ngIf="errmessage" class="alert alert-danger mt-4 mb-0" role="alert">
+				Ops: {{errmessage}}
+		</div>
+	</div>
+
+	<div class="col-12">
+		<div *ngIf="posmessage" class="alert alert-success mt-4 mb-0" role="alert">
+				{{posmessage}}
+		</div>
+	</div>
+	
+	<div
+	*ngIf="messages3" class="row mt-5 mb-5 d-flex justify-content-start">
+		<div class="col-12"><h3>Tavolo: &nbsp;&nbsp;
+		{{messages3.tavolo}}</h3></div>
+		<div class="col-12"><h3>Cameriere assegnato: &nbsp;&nbsp;
+		{{messages3.cameriere}} </h3></div>
+		<div class="col-12"><h3>Barista: &nbsp;&nbsp;
+		{{messages3.barista}} </h3></div>
+		<div class="col-12"><h3>Numero persone:&nbsp;&nbsp; 
+		{{messages3.persone_da_servire}} </h3></div>
+		<div class="col-12"><h3>Ora ordine: &nbsp;&nbsp;
+		{{created_date | date: 'hh:mm:ss a'}} </h3></div>
+		<div class="col-12">
+			<h3  [ngSwitch]="messages3.stato_pizze">
+				Stato pizze: &nbsp;&nbsp;
+				<span style="color:red" *ngSwitchCase="0">Pizze non pronte</span>
+				<span style="color:orange" *ngSwitchCase="1">Pizze pronte ma non consegnate </span>
+				<span style="color:green" *ngSwitchCase="2">Pizze consegnate </span>
+			</h3>
+		</div>
+		<div class="col-12">
+			<h3  [ngSwitch]="messages3.stato_bibite">
+				Stato bibite: &nbsp;&nbsp;
+				<span style="color:red" *ngSwitchCase="0">Bibite non pronte</span>
+				<span style="color:orange" *ngSwitchCase="1">Bibite in lavorazione </span>
+				<span style="color:orange" *ngSwitchCase="2">Bibite pronte ma non consegnate</span>
+				<span style="color:green" *ngSwitchCase="3">Bibite consegnate</span>
+			</h3>
+		</div>
+		<div class="col-12 mt-4"><h3>Pizze ordinate:</h3>
+			<div class="list-group" id="list-tab" role="tablist">
+				<div class="list-group" >
+					<div *ngFor="let message of messages4" >
+						<li class="list-group-item disabled" *ngIf="!message.bibita_pizza">
+							 <div class="row d-flex mx-1 justify-content-between">
+								
+									<h6>{{message.nome_prodotto}}</h6>
+									{{message.prezzo}}€
+									<span  [ngSwitch]="message.stato_preparazione">
+										Stato pizza: &nbsp;&nbsp;
+										<span style="color:red" *ngSwitchCase="0">Non in forno</span>
+										<span style="color:orange" *ngSwitchCase="1">In forno</span>
+										<span style="color:green" *ngSwitchCase="2">Preparata</span>
+									</span>
+									Pizzaiolo: {{message.pizzaiolo}}
+								
+							 </div>	
+							 <div class="row d-flex mx-1 justify-content-start">
+								<div class="ml-2" *ngFor="let put of message.aggiunte">
+									<span class="badge badge-success badge-pill">{{put}}</span>
+								</div>
+							 </div>	
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 mt-3 mb-5"><h3>Bibite ordinate:</h3>
+			<div class="list-group" id="list-tab" role="tablist">
+				<div class="list-group" >
+					<div *ngFor="let message of messages4" >
+						<li class="list-group-item disabled" *ngIf="message.bibita_pizza">
+							 <div class="row">
+								<div class="col">
+									<h6>{{message.nome_prodotto}}</h6>
+								</div>
+								<div class="col">
+									 {{message.prezzo}}€
+								</div>	
+							 </div>	
+							 <div class="row d-flex justify-content-start">
+								<div class="ml-2" *ngFor="let put of message.aggiunte">
+									<span class="badge badge-success badge-pill">{{put}}</span>
+								</div>
+							 </div>	
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 d-flex justify-content-start">
+				<h2 class="ml-5">Totale: {{messages3.totale}}€</h2>
+		</div>
+		<div class="col-md-6 d-flex justify-content-end"> 
+			<button  [disabled]="!messages3.mostra_paga" type="button" class="btn btn-danger btn-lg btn-block mr-5" 
+			(click)="paga()">Crea scontrino e paga</button>
+		</div>
+	</div>
+	<div *ngIf="tavolo_libero" class="row mt-5 ml-5 d-flex justify-content-center">
+		<div class="col-12"><h3>Tavolo libero </h3></div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+
+.btn-warning:disabled {
+    color: #212529;
+    background-color: #dae0e5;
+    border-color: #dae0e5;
+	
+}
+
+.btn-warning:not(:disabled):not(.disabled) {
+    cursor: pointer;
+	float: left; 
+   
+
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+
+#pulse {
+    height: 100%; 
+}
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+

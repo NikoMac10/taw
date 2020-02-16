@@ -1,0 +1,49 @@
+
+<div class="row d-flex justify-content-around mt-4">
+	<button type="button" class="btn btn-danger ml-5 btn-lg " (click)="logout()">Logout</button>
+	<h3>{{ time | date: 'hh:mm:ss a' }}</h3>
+	<h3>Cameriere: {{us.get_username()}}</h3>
+</div>
+<div *ngIf="tavolo" class="row d-flex justify-content-around mt-4">
+	<h3>Ora ordine: {{ ora_ordine | date: 'hh:mm:ss a' }}</h3>
+	<h3>Tavolo: {{tavolo}}</h3>
+</div>
+
+<div class="col-12">
+	<div *ngIf="errmessage" class="alert alert-danger mt-4 mb-0" role="alert">
+			Ops: {{errmessage}}
+	</div>
+</div>
+
+<div class="col-12">
+	<div *ngIf="posmessage" class="alert alert-success mt-4 mb-0" role="alert">
+			{{posmessage}}
+	</div>
+</div>
+
+<div class="list-group mt-4" id="list-tab" role="tablist">
+	<div class="list-group ">
+		<div *ngFor="let message of messages" class="card" style="margin: 5px" > 
+			<li class="list-group-item">
+				<div class="row d-flex justify-content-around">
+					<p class="h3 mx-1 ">{{message.nome_prodotto}}</p>
+					<h4>T.P. <span class="badge badge-secondary mx-1">{{message.tempo_di_preparazione}}</span></h4>
+				</div>
+				<div class="row d-flex justify-content-start">
+					<h5><span *ngFor="let aggiunte of message.aggiunte"class="badge badge-secondary mx-1">{{aggiunte}}</span></h5>
+				</div>
+				<div class="row mx-1 d-flex justify-content-end">
+					<div class="d-flex justify-content-end mx-1" *ngIf="message.stato_preparazione == 0 ; else elseBlock">
+						<button type="button"  class="btn btn-success btn-lg" (click)="inizio_fine_preparazione(message.stato_preparazione, message._id)"> 
+						{{ message.stato_preparazione == 1  ? 'Fine preparazione' : 'Inizio preparazione' }}</button>
+					</div>
+					
+					<ng-template #elseBlock>
+						<button type="button"  class="btn btn-warning btn-lg" (click)="inizio_fine_preparazione(message.stato_preparazione, message._id)"> 
+						{{ message.stato_preparazione == 1  ? 'Fine preparazione' : 'Inizio preparazione' }}</button>
+					</ng-template>
+				</div>
+			</li>
+		</div>
+	</div>
+</div>

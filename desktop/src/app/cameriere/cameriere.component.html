@@ -1,0 +1,36 @@
+<div class="row d-flex justify-content-around mt-5">
+	<button type="button" class="btn btn-danger"  (click)="logout()">Logout</button>
+	<div id="pulse">
+		<button type="button" class="btn btn-warning" [disabled]="numero_consegne == undefined" (click)="consega_ordini()">Cosegna ordini</button>
+	</div>	
+</div>
+<div class="row d-flex justify-content-around mt-4">
+	<h3>{{ time | date: 'hh:mm:ss a' }}</h3>
+	<h3>Cameriere: {{us.get_username()}}</h3>
+</div>
+
+<div class="row d-flex justify-content-center">
+	<p class="h3 mt-5 ml-2">Selezionare il tavolo corrente</p>
+		<div class="col-12">
+			<div class="list-group mb-4" id="list-tab" role="tablist">
+				<div class="list-group ">
+					<div *ngFor="let message of messages">
+						<button type="button" *ngIf="message.booleano ; else loggedOut" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center active" (click)="tavolo(message.numero);">Tavolo n.{{message.numero}} <span class="badge badge-success badge-pill">Posti tavolo:{{message.posti}}</span> </button>
+						<ng-template #loggedOut>
+						<button type="button" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center" (click)="tavolo(message.numero);">Tavolo n.{{message.numero}} <span class="badge badge-primary badge-pill">Posti tavolo:{{message.posti}}</span> </button>
+						</ng-template>
+					</div>
+				</div>
+
+	  
+				<br>
+				<input class="form-control" #persone [hidden]="numero==undefined" type="number" placeholder="Inserire il numero di persone da servire">
+				<div *ngIf="errmessage" class="alert alert-danger mt-4 mb-0" role="alert">
+					 Ops: {{errmessage}}
+				</div>
+				<button type="button" [hidden]="numero==undefined" class="btn btn-success mt-4" 
+				(click)="crea_ordine(persone.value)">Inizia acquisizione ordine</button>
+			</div>
+		</div>
+</div>
+

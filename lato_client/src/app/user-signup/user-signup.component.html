@@ -1,0 +1,78 @@
+<div class="container" style="width: 400px; margin-top: 20px;" >
+
+<form class="form-signin"  >
+  
+  <div class="text-center">  
+    <img src="assets/img/pizza-slice-solid.svg" class="loginlogo"/>
+    <h1 class="h3 mb-3 font-weight-normal">Registrazione nuovo utente</h1>
+  </div>
+
+ <div class="form-group">
+    <label for="inputUsername">Username</label>
+    <input type="text" #username="ngModel" required name="username" [(ngModel)]="user.username" class="form-control" id="inputUsername" placeholder="Enter username">
+  </div>
+
+  <div [hidden]="username.valid || username.pristine"
+      class="alert alert-danger">
+      Username mancante
+  </div>
+
+  <div class="form-group">
+    <label for="inputCognome">Cognome</label>
+    <input type="text" #cognome="ngModel" name="cognome" [(ngModel)]="user.cognome"  class="form-control" required id="inputCognome" aria-describedby="cognomeHelp" placeholder="Inserisci cognome">
+    <small id="cognomeHelp" class="form-text text-muted">I tuoi dati personali non verranno condivisi con nessuno.</small>
+  </div>
+
+  <div [hidden]="cognome.valid || cognome.pristine"
+      class="alert alert-danger">
+      Cognome mancante
+  </div>
+  
+  <div class="form-group">
+    <label for="imputNome">Nome</label>
+    <input type="text" #nome="ngModel" name="nome" [(ngModel)]="user.nome"  class="form-control" required id="inputNome" aria-describedby="nomeHelp" placeholder="Inserisci nome">
+    <small id="nomeHelp" class="form-text text-muted">I tuoi dati personali non verranno condivisi con nessuno.</small>
+  </div>
+
+  <div [hidden]="nome.valid || nome.pristine"
+      class="alert alert-danger">
+      Nome mancante
+  </div>
+  
+  <div class="form-group">
+    <label for="inputRuolo">Ruolo</label>
+    <select type="text" #ruolo="ngModel" required name="ruolo" [(ngModel)]="user.ruolo" class="form-control" id="inputRuolo" >
+		<option value="Cameriere">Cameriere</option>
+		<option value="Pizzaiolo">Pizzaiolo</option>
+		<option value="Barista">Barista</option>
+		<option value="Cassiere">Cassiere</option>
+	</select>
+  </div>
+  
+  <div [hidden]="ruolo.valid || ruolo.pristine"
+      class="alert alert-danger">
+    Ruolo mancante
+  </div>
+  
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input type="password" #password="ngModel" required name="password" [(ngModel)]="user.password" class="form-control" id="inputPassword" placeholder="Password">
+  </div>
+
+  <div [hidden]="password.valid || password.pristine"
+      class="alert alert-danger">
+    Password mancante
+  </div>
+  
+  
+  <div *ngIf="errmessage" class="alert alert-danger" role="alert">
+    Ops: {{errmessage}}
+  </div>
+  <div *ngIf="posmessage" class="alert alert-success" role="alert">
+     {{posmessage}}
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block mb-4" [disabled]=" !cognome.valid || !password.valid || !username.valid || 
+  !nome.valid || !ruolo.valid" (click)="signup();" >Registrati!</button>
+</form>
+</div>
