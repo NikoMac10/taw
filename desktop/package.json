@@ -48,7 +48,7 @@
     "circular-dependency-plugin": "^4.2.1",
     "codelyzer": "^4.0.1",
     "copy-webpack-plugin": "~4.4.1",
-    "electron": "^1.7.8",
+    "electron": "^13.6.6",
     "electron-packager": "^9.1.0",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.29.0",
